@@ -4,6 +4,7 @@
 #define limit 1000
 #define limitparola 100
 void sifrele(char[], char[]);
+void sifreCoz(char[], char[]);
 int say(char[], char);
  
 char metin[limit];
@@ -17,7 +18,8 @@ int main() {
  printf("-------------------------------------\n");
   printf("Yapacaginiz islemi secin:\n");
    printf("[1]-Sifreleme yap \n");
-   printf("[2]-Kapat \n");
+   printf("[2]-Desifre yap \n");
+   printf("[3]-Kapat \n");
     printf("-------------------------------------\n");
      scanf("%d",&secA);
 	 
@@ -40,7 +42,20 @@ int main() {
           printf("--------- Sifrelendi... --------------\n");
           printf("Sifreli Hali:\n[+]%s\n", metin);
       }
-	  
+	  else if(secA==2){
+	   	  getchar();
+	      printf("Sifreli metini girin\n");
+          gets(metin);
+          printf("Parola girin\n");
+          gets(sifre);
+          printf("-------------------------------------\n");
+          printf("------ Sifre Cozuluyor -----------\n");
+           printf("-------------------------------------\n");
+        sifreCoz(karakter, sifre);
+        printf("Sifre Cozulmus hali:\n[+]%s\n", metin);
+          printf("-------------------------------------\n");
+          
+      }
      else{
         printf("Program Sonlandi ");
        
@@ -70,8 +85,27 @@ void sifrele(char karakter[], char sifre[]) {
         }
     }
 }
+void sifreCoz(char karakter[], char sifre[]) {
+    int i, j = 0, metinHarfSirasi, parolaHarfSirasi;
+    int metinBoyut = strlen(metin);
+    int sifreBoyut = strlen(sifre);
+    for (i = 0; i < metinBoyut; i++, j++) {
+        if (j >= sifreBoyut)
+            j = 0;
  
-
+        metinHarfSirasi = say(karakter, metin[i]);
+        parolaHarfSirasi = say(karakter, sifre[j]);
+ 
+        if (metinHarfSirasi != -1 && parolaHarfSirasi != -1) {
+            metinHarfSirasi = (metinHarfSirasi - parolaHarfSirasi) % karakterBoyutu;
+ 
+            if (metinHarfSirasi < 0)
+                metinHarfSirasi += karakterBoyutu;
+ 
+            metin[i] = karakter[metinHarfSirasi];
+        }
+    }
+}
  
 int say(char karakter[], char arananHarf) {
  
