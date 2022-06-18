@@ -11,9 +11,11 @@ char metin[limit];
 int karakterBoyutu;
 int secA,secB;
 char sifre[limitparola];
+// Yukarýda deðiþkenleri tanýmladým. ayrýca char degiskenleri için karakter limiti ekledim
 int main() {
 	
   char karakter[] = "abcçdefgðhýijklmnoöprsþtuüvyz0123456789ABCÇDEFGÐHIÝJKLMNOÖPRSÞTUÜVYZ.,!'^+-/*%&()=?#${[]}~<>| ";
+  //karakterler tanýmladým
     karakterBoyutu = strlen(karakter);
  printf("-------------------------------------\n");
   printf("Yapacaginiz islemi secin:\n");
@@ -23,6 +25,7 @@ int main() {
     printf("-------------------------------------\n");
      scanf("%d",&secA);
 	 
+	 //Programýn menü kýsmý hangi iþlemin yapýlacaðýný seçiyorum. seçilen deðer if ile kolþulu saðlýyorsa o iþlemi gerçekleþtiriyorum
      if(secA<=1){
 	      getchar();
           printf("Sifrelenecek metini girin\n");
@@ -42,6 +45,9 @@ int main() {
           printf("--------- Sifrelendi... --------------\n");
           printf("Sifreli Hali:\n[+]%s\n", metin);
       }
+      // eðer secilen deðer 1 ise yani þifrele ise
+      // önce metin ve parola giriþi istiecek daha sonra sifrele(karakter, sifre); iþlemi ile alttaki fonksiyonu çaðýrýp
+      // þifreleme iþlemini gerçekleþtirecektir.
 	  else if(secA==2){
 	   	  getchar();
 	      printf("Sifreli metini girin\n");
@@ -56,12 +62,12 @@ int main() {
           printf("-------------------------------------\n");
           
       }
+      //eðer 2 seçilirse  öncelikli þifreli metin ve parola giriþi ister daha sonra þifre çözme fonksiyonu çaðýrýlarak þifre çözülür
      else{
         printf("Program Sonlandi ");
        
 	  }
-     
-     
+	  // program sonu   
   system("pause");  
   return 0;
 }
@@ -71,6 +77,7 @@ void sifrele(char karakter[], char sifre[]) {
     int i, j = 0, metinHarfSirasi, parolaHarfSirasi;
     int metinBoyut = strlen(metin);
     int sifreBoyut = strlen(sifre);
+    // metinboyutu ve þifre boyutunu hesaplattýrýyorum.
     for (i = 0; i < metinBoyut; i++, j++) {
         if (j >= sifreBoyut)
             j = 0;
@@ -84,11 +91,14 @@ void sifrele(char karakter[], char sifre[]) {
             metin[i] = karakter[metinHarfSirasi];
         }
     }
+    // girilen metin boyutuna baðlý olarak parola tekrarlanýyor. 
+ 	//daha sonra bu tekrarlanan deðerler toplanýyor ve þifreli olarak çýkýyor. yani burada þifrelemenin yapýldýðý ana fonksiyon yer alýr.
 }
 void sifreCoz(char karakter[], char sifre[]) {
     int i, j = 0, metinHarfSirasi, parolaHarfSirasi;
     int metinBoyut = strlen(metin);
     int sifreBoyut = strlen(sifre);
+    // ayný þekilde þifre ve metin boyutu hesaplanýr
     for (i = 0; i < metinBoyut; i++, j++) {
         if (j >= sifreBoyut)
             j = 0;
@@ -105,6 +115,7 @@ void sifreCoz(char karakter[], char sifre[]) {
             metin[i] = karakter[metinHarfSirasi];
         }
     }
+    // þifreleme iþteminin tam tersi gerçekleþtirilir metin deðerlerinden parola deðerleri çýkartýlarak þifre çözülür.
 }
  
 int say(char karakter[], char arananHarf) {
@@ -116,4 +127,5 @@ int say(char karakter[], char arananHarf) {
             sayac = i;
     }
     return sayac;
+    // burada ise girilen karakter bulunup kancinci sirada olduðu hesaplanýr. yani karakter deðerleri bulunur.
 }
